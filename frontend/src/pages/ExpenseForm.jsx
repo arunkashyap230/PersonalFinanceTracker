@@ -24,19 +24,24 @@ function ExpenseForm({ expenseToEdit, onSuccess }) {
     e.preventDefault();
     const token = localStorage.getItem("token");
     try {
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+
       if (expenseToEdit) {
         await axios.put(
-          `http://localhost:5000/api/expenses/${expenseToEdit._id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/api/expenses/${expenseToEdit._id}`,
           form,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          config
         );
       } else {
-        await axios.post("http://localhost:5000/api/expenses", form, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/api/expenses`,
+          form,
+          config
+        );
       }
+
       alert("Expense saved!");
       setForm({
         amount: "",
@@ -52,8 +57,9 @@ function ExpenseForm({ expenseToEdit, onSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="expense-form">
       <h2>{expenseToEdit ? "Edit" : "Add"} Expense</h2>
+
       <input
         name="amount"
         type="number"
@@ -62,6 +68,7 @@ function ExpenseForm({ expenseToEdit, onSuccess }) {
         placeholder="Amount"
         required
       />
+
       <input
         name="category"
         value={form.category}
@@ -69,6 +76,7 @@ function ExpenseForm({ expenseToEdit, onSuccess }) {
         placeholder="Category"
         required
       />
+
       <input
         name="date"
         type="date"
@@ -76,6 +84,7 @@ function ExpenseForm({ expenseToEdit, onSuccess }) {
         onChange={handleChange}
         required
       />
+
       <input
         name="paymentMethod"
         value={form.paymentMethod}
@@ -83,12 +92,14 @@ function ExpenseForm({ expenseToEdit, onSuccess }) {
         placeholder="Payment Method"
         required
       />
+
       <textarea
         name="notes"
         value={form.notes}
         onChange={handleChange}
         placeholder="Notes"
       ></textarea>
+
       <button type="submit">{expenseToEdit ? "Update" : "Add"}</button>
     </form>
   );
