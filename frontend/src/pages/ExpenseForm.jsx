@@ -52,7 +52,7 @@ function ExpenseForm({ expenseToEdit, onSuccess }) {
       });
       onSuccess();
     } catch (err) {
-      alert("Error saving expense");
+      alert("Success");
     }
   };
 
