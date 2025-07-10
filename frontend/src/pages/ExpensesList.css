@@ -1,85 +1,118 @@
-/* Container */
+/* ExpensesList.css */
+
 .container {
   max-width: 1000px;
   margin: auto;
   padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Title */
 .container h2 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 2rem;
-  color: #007bff;
+  color: #333;
 }
 
-/* Filters */
+/* Filter section */
 .expense-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2rem;
+  justify-content: center;
 }
 
 .expense-filters input,
 .expense-filters select {
-  padding: 0.75rem;
+  padding: 0.8rem 1rem;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  flex: 1;
-  min-width: 200px;
+  width: 200px;
+  transition: 0.3s ease;
 }
 
-/* Expense List */
+.expense-filters input:focus,
+.expense-filters select:focus {
+  outline: none;
+  border-color: #4b79a1;
+  box-shadow: 0 0 5px rgba(75, 121, 161, 0.3);
+}
+
+/* Expense list */
 .expense-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .expense-item {
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 8px;
+  background: white;
+  border: 1px solid #e1e1e1;
+  padding: 1rem 1.5rem;
   margin-bottom: 1rem;
+  border-radius: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .expense-item div {
   display: flex;
-  gap: 10px;
+  gap: 0.8rem;
 }
 
-/* Buttons */
 .expense-item button {
-  padding: 6px 12px;
-  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s ease;
+  font-size: 0.95rem;
 }
 
 .expense-item button:first-child {
-  background-color: #28a745;
+  background-color: #4b79a1;
   color: white;
-}
-
-.expense-item button:first-child:hover {
-  background-color: #218838;
 }
 
 .expense-item button:last-child {
-  background-color: #dc3545;
+  background-color: #e74c3c;
   color: white;
 }
 
-.expense-item button:last-child:hover {
-  background-color: #c82333;
+.expense-item button:hover {
+  opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .expense-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .expense-filters input,
+  .expense-filters select {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .expense-item {
+    padding: 1rem;
+  }
+
+  .expense-item div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .expense-item button {
+    width: 100%;
+  }
 }
