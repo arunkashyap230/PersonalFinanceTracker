@@ -1,1 +1,88 @@
 
+/* LoginPage.css */
+
+.auth-container {
+  max-width: 400px;
+  margin: 5rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.auth-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Input fields */
+.auth-container input {
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #4b79a1;
+  box-shadow: 0 0 5px rgba(75, 121, 161, 0.3);
+}
+
+/* Primary button */
+.auth-container button[type="submit"] {
+  background-color: #4b79a1;
+  color: #fff;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container button[type="submit"]:hover {
+  background-color: #35516a;
+}
+
+/* Secondary button inside link */
+.auth-container p {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.auth-container p button {
+  background-color: #e1e1e1;
+  color: #333;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container p button:hover {
+  background-color: #d0d0d0;
+}
+
+/* Responsive design */
+@media (max-width: 500px) {
+  .auth-container {
+    padding: 1.5rem;
+    margin: 3rem 1rem;
+  }
+
+  .auth-container h2 {
+    font-size: 1.6rem;
+  }
+}
