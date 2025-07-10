@@ -1,69 +1,75 @@
-
 /* ExpenseForm.css */
 
 form {
   max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.5rem;
+  transition: 0.3s ease-in-out;
 }
 
 form h2 {
+  font-size: 2rem;
+  color: #2c3e50;
   text-align: center;
   margin-bottom: 1rem;
-  font-size: 1.8rem;
-  color: #333;
 }
 
-/* Inputs and textarea */
+/* Input and Textarea */
 form input,
 form textarea {
-  padding: 0.9rem 1rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid #dcdfe6;
+  border-radius: 10px;
+  background: #f9f9f9;
   transition: 0.3s ease;
   width: 100%;
   font-family: inherit;
-  resize: vertical;
 }
 
 form input:focus,
 form textarea:focus {
   outline: none;
-  border-color: #4b79a1;
-  box-shadow: 0 0 5px rgba(75, 121, 161, 0.3);
+  border-color: #3498db;
+  background: #ffffff;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
 }
 
-/* Button styling */
+/* Button */
 form button {
-  background-color: #4b79a1;
-  color: #fff;
-  padding: 0.9rem;
-  font-size: 1rem;
+  background: linear-gradient(to right, #3498db, #2980b9);
+  color: white;
+  padding: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 form button:hover {
-  background-color: #35516a;
+  background: linear-gradient(to right, #2980b9, #2471a3);
 }
 
-/* Responsive Design */
+/* Responsive tweaks */
 @media (max-width: 600px) {
   form {
     padding: 1.5rem;
+    margin: 2rem 1rem;
   }
 
   form h2 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  form button {
+    font-size: 1rem;
   }
 }
