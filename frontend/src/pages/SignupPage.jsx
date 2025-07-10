@@ -6,25 +6,31 @@ function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register`, {
         name,
         email,
         password,
       });
+      alert("Signup successful. Please login.");
       navigate("/");
     } catch (err) {
-      alert("Signup failed");
+      alert(err?.response?.data?.message || "Signup failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="auth-container">
       <h2>Signup</h2>
+
       <input
         type="text"
         value={name}
@@ -46,7 +52,10 @@ function SignupPage() {
         placeholder="Password"
         required
       />
-      <button type="submit">Signup</button>
+
+      <button type="submit" disabled={loading}>
+        {loading ? "Signing up..." : "Signup"}
+      </button>
     </form>
   );
 }
