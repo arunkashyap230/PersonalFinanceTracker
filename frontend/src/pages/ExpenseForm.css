@@ -1,1 +1,69 @@
 
+/* ExpenseForm.css */
+
+form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+form h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* Inputs and textarea */
+form input,
+form textarea {
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  width: 100%;
+  font-family: inherit;
+  resize: vertical;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #4b79a1;
+  box-shadow: 0 0 5px rgba(75, 121, 161, 0.3);
+}
+
+/* Button styling */
+form button {
+  background-color: #4b79a1;
+  color: #fff;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #35516a;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  form {
+    padding: 1.5rem;
+  }
+
+  form h2 {
+    font-size: 1.5rem;
+  }
+}
