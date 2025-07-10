@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./ExpenseForm.css";
 
 function ExpenseForm({ expenseToEdit, onSuccess }) {
   const [form, setForm] = useState({
