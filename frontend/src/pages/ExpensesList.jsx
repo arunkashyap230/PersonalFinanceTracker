@@ -19,23 +19,34 @@ function ExpensesList() {
 
   // Fetch expenses
   const fetchExpenses = async () => {
-    const res = await axios.get("http://localhost:5000/api/expenses", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setExpenses(res.data);
-    setFilteredExpenses(res.data);
-    setEditingExpense(null);
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/expenses`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setExpenses(res.data);
+      setFilteredExpenses(res.data);
+      setEditingExpense(null);
+    } catch (err) {
+      console.error("Error fetching expenses", err);
+    }
   };
 
   // Fetch categories
   const fetchCategories = async () => {
-    const res = await axios.get(
-      "http://localhost:5000/api/expenses/categories",
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    setCategories(res.data);
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/expenses/categories`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setCategories(res.data);
+    } catch (err) {
+      console.error("Error fetching categories", err);
+    }
   };
 
   useEffect(() => {
@@ -75,10 +86,17 @@ function ExpensesList() {
 
   const deleteExpense = async (id) => {
     if (window.confirm("Are you sure you want to delete this expense?")) {
-      await axios.delete(`http://localhost:5000/api/expenses/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      fetchExpenses();
+      try {
+        await axios.delete(
+          `${process.env.REACT_APP_BACKEND_URL}/api/expenses/${id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        fetchExpenses();
+      } catch (err) {
+        alert("Error deleting expense");
+      }
     }
   };
 
@@ -97,7 +115,9 @@ function ExpensesList() {
 
         <select
           value={filters.category}
-          onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+          onChange={(e) =>
+            setFilters({ ...filters, category: e.target.value })
+          }
         >
           <option value="">All Categories</option>
           {categories.map((cat) => (
@@ -128,7 +148,10 @@ function ExpensesList() {
 
       {/* Edit Form */}
       {editingExpense && (
-        <ExpenseForm expenseToEdit={editingExpense} onSuccess={fetchExpenses} />
+        <ExpenseForm
+          expenseToEdit={editingExpense}
+          onSuccess={fetchExpenses}
+        />
       )}
 
       {/* Expense List */}
