@@ -30,7 +30,7 @@ function ReportsPage() {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/expenses/report",
+          `${process.env.REACT_APP_BACKEND_URL}/api/expenses/report`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -40,6 +40,7 @@ function ReportsPage() {
         alert("Failed to fetch report");
       }
     };
+
     fetchReport();
   }, []);
 
@@ -56,6 +57,8 @@ function ReportsPage() {
           "#FFCE56",
           "#4BC0C0",
           "#9966FF",
+          "#F77825",
+          "#00A8B5",
         ],
       },
     ],
