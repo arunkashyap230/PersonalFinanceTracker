@@ -1,65 +1,113 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import "./LoginPage.css";
+import {
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Box,
+  Stack,
+} from "@mui/material";
+import { motion } from "framer-motion";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`,
-        { email, password }
-      );
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password,
+      });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
-      alert(err?.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
+      setError("Invalid credentials. Please try again.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="auth-container">
-      <h2>Login</h2>
+    <Box
+      component={motion.div}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      sx={{
+        height: "100vh",
+        background: "linear-gradient(to right, #2193b0, #6dd5ed)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        p: 2,
+      }}
+    >
+      <Paper
+        elevation={6}
+        sx={{
+          p: 4,
+          maxWidth: 400,
+          width: "100%",
+          borderRadius: 3,
+          backgroundColor: "white",
+        }}
+        component={motion.div}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        <Typography variant="h5" mb={2} align="center">
+          Login to Your Account
+        </Typography>
 
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-        required
-      />
+        <form onSubmit={handleSubmit}>
+          <Stack spacing={2}>
+            <TextField
+              label="Email"
+              variant="outlined"
+              fullWidth
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <TextField
+              label="Password"
+              variant="outlined"
+              fullWidth
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-        required
-      />
+            {error && (
+              <Typography variant="body2" color="error">
+                {error}
+              </Typography>
+            )}
 
-      <button type="submit" disabled={loading}>
-        {loading ? "Logging in..." : "Login"}
-      </button>
+            <Button variant="contained" color="primary" type="submit" fullWidth>
+              Login
+            </Button>
+          </Stack>
+        </form>
 
-      <p style={{ marginTop: "1rem" }}>
-        Don’t have an account?{" "}
-        <Link
-          to="/signup"
-          style={{ marginLeft: "10px", textDecoration: "underline" }}
-        >
-          Sign up here
-        </Link>
-      </p>
-    </form>
+        <Typography variant="body2" align="center" mt={3}>
+          Don’t have an account?{" "}
+          <Link
+            to="/signup"
+            style={{ textDecoration: "none", color: "#1976d2" }}
+          >
+            Sign up
+          </Link>
+        </Typography>
+      </Paper>
+    </Box>
   );
 }
 
