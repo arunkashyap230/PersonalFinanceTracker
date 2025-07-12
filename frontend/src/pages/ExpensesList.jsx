@@ -37,14 +37,13 @@ function ExpensesList() {
 
   const fetchExpenses = async () => {
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/expenses`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await axios.get(`${BASE_URL}/api/expenses`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setExpenses(res.data);
       setFilteredExpenses(res.data);
+    } catch (error) {
+      alert("Failed to load expenses.");
     } finally {
       setLoading(false);
       setEditingExpense(null);
@@ -52,10 +51,14 @@ function ExpensesList() {
   };
 
   const fetchCategories = async () => {
-    const res = await axios.get(`${BASE_URL}/api/expenses/categories`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setCategories(res.data);
+    try {
+      const res = await axios.get(`${BASE_URL}/api/expenses/categories`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCategories(res.data);
+    } catch (err) {
+      console.error("Failed to load categories");
+    }
   };
 
   useEffect(() => {
@@ -94,10 +97,14 @@ function ExpensesList() {
 
   const deleteExpense = async (id) => {
     if (window.confirm("Are you sure you want to delete this expense?")) {
-      await axios.delete(`${BASE_URL}/api/expenses/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      fetchExpenses();
+      try {
+        await axios.delete(`${BASE_URL}/api/expenses/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        fetchExpenses();
+      } catch (err) {
+        alert("Failed to delete expense");
+      }
     }
   };
 
