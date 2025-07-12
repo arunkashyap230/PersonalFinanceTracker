@@ -37,9 +37,12 @@ function ExpensesList() {
 
   const fetchExpenses = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/expenses`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/expenses`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setExpenses(res.data);
       setFilteredExpenses(res.data);
     } finally {
