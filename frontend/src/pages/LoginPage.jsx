@@ -14,16 +14,19 @@ import { motion } from "framer-motion";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, {
         email,
         password,
       });
+
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
@@ -84,13 +87,11 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-
             {error && (
               <Typography variant="body2" color="error">
                 {error}
               </Typography>
             )}
-
             <Button variant="contained" color="primary" type="submit" fullWidth>
               Login
             </Button>
