@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -43,10 +42,11 @@ function PublicExpensesPage() {
     const fetchExpenses = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/public-expenses"
+          `${process.env.REACT_APP_BACKEND_URL}/api/public-expenses`
         );
         setExpenses(res.data);
       } catch (err) {
+        console.error("Error fetching expenses:", err); // ✅ Add this
         alert("Failed to load public expenses");
       }
     };
@@ -80,7 +80,7 @@ function PublicExpensesPage() {
       >
         <Toolbar>
           <Typography variant="h6" sx={{ ml: 1 }}>
-            💰 Expense
+            💰 Expense App
           </Typography>
         </Toolbar>
         <Divider />
@@ -130,7 +130,7 @@ function PublicExpensesPage() {
               mb: 3,
             }}
           >
-            <Typography variant="h4"> Expenses</Typography>
+            <Typography variant="h4">🌍 All Public Expenses</Typography>
             <TextField
               label="Search"
               variant="outlined"
